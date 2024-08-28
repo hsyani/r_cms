@@ -1,11 +1,11 @@
 // File: /lib/screens/home_screen.dart
+
 import 'package:flutter/material.dart';
-import 'package:r_cms_v_3_0/screens/home_screen.dart';
-import 'package:r_cms_v_3_0/widgets/login_card.dart';
 import 'dart:async';
 import '../utils/utils.dart';
 import 'package:go_router/go_router.dart';
-import 'package:r_cms_v_3_0/widgets/nav_button.dart';
+import '../widgets/nav_button.dart';
+import '../widgets/login_card.dart';
 
 class InitScreen extends StatefulWidget {
   const InitScreen({super.key});
@@ -48,23 +48,29 @@ class _InitScreenState extends State<InitScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.blue, Colors.purple],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            double maxWidth = constraints.maxWidth;
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          double maxWidth = constraints.maxWidth;
 
-            double dateFontSize = maxWidth > 600 ? 24 : 18;
-            double timeFontSize = maxWidth > 600 ? 64 : 48;
+          // 반응형으로 패딩 설정
+          double horizontalPadding = maxWidth > 800 ? 80.0 : 20.0;
+          double verticalPadding = 40.0;
 
-            return Column(
+          double dateFontSize = maxWidth > 600 ? 24 : 18;
+          double timeFontSize = maxWidth > 600 ? 64 : 48;
+
+          return Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(
+                horizontal: horizontalPadding, vertical: verticalPadding),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.blue, Colors.purple],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
@@ -92,27 +98,19 @@ class _InitScreenState extends State<InitScreen> {
                 LoginCard(
                     usernameController: _usernameController,
                     passwordController: _passwordController),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: maxWidth > 600 ? 40.0 : 20.0),
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 20),
-                      NavButton(
-                        label: 'MSDS 열람',
-                        description: '등록된 MSDS 확인',
-                        icon: Icons.warning_amber_outlined,
-                        onPressed: () {
-                          // 화면 전환 로직
-                        },
-                      ),
-                    ],
-                  ),
+                const SizedBox(height: 20),
+                NavButton(
+                  label: 'MSDS 열람',
+                  description: '등록된 MSDS 확인',
+                  icon: Icons.warning_amber_outlined,
+                  onPressed: () {
+                    // 화면 전환 로직
+                  },
                 ),
               ],
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }

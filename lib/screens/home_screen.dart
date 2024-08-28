@@ -1,7 +1,10 @@
+// File: /lib/screens/home_screen.dart
+
 import 'package:flutter/material.dart';
-import 'settings_screen.dart'; // 설정 페이지
-import 'admin_screen.dart'; // 어드민 페이지
-import 'dashboard_screen.dart'; // 대시보드 페이지
+import 'package:draggable_home/draggable_home.dart';
+import 'settings_screen.dart';
+import 'admin_screen.dart';
+import 'dashboard_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,40 +16,63 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('보고서'),
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {
-            Scaffold.of(context).openDrawer();
-          },
+    return DraggableHome(
+      appBarColor: Colors.transparent,
+      title: const Text('Home'), // 상단 제목
+      headerWidget: _buildHeader(), // 상단 헤더 위젯
+      body: [
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              _buildReportItem(
+                context,
+                icon: Icons.science,
+                title: '화학물질 관리대장',
+              ),
+              _buildReportItem(
+                context,
+                icon: Icons.ac_unit,
+                title: '특별관리물질 관리대장',
+              ),
+              _buildReportItem(
+                context,
+                icon: Icons.calendar_today,
+                title: '월간시약 관리대장',
+              ),
+              _buildReportItem(
+                context,
+                icon: Icons.warning,
+                title: '유해인자 취급 및 관리대장',
+              ),
+            ],
+          ),
         ),
-      ),
+      ],
       drawer: _buildDrawer(context), // 사이드 메뉴 추가
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView(
-          children: [
-            _buildReportItem(
-              context,
-              icon: Icons.science,
-              title: '화학물질 관리대장',
+    );
+  }
+
+  // 상단 헤더 위젯
+  Widget _buildHeader() {
+    return Container(
+      color: Colors.blue,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text(
+              '상단 슬라이딩 패널',
+              style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
             ),
-            _buildReportItem(
-              context,
-              icon: Icons.ac_unit,
-              title: '특별관리물질 관리대장',
-            ),
-            _buildReportItem(
-              context,
-              icon: Icons.calendar_today,
-              title: '월간시약 관리대장',
-            ),
-            _buildReportItem(
-              context,
-              icon: Icons.warning,
-              title: '유해인자 취급 및 관리대장',
+            SizedBox(height: 10),
+            Text(
+              '이곳에 중요 정보를 표시하거나\n추가 기능을 배치할 수 있습니다.',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 16, color: Colors.white),
             ),
           ],
         ),
@@ -54,6 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  // 사이드 드로어 위젯
   Widget _buildDrawer(BuildContext context) {
     return Drawer(
       child: ListView(
@@ -116,10 +143,12 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildDrawerItem(
-      {required IconData icon,
-      required String text,
-      required GestureTapCallback onTap}) {
+  // 드로어 아이템 생성기
+  Widget _buildDrawerItem({
+    required IconData icon,
+    required String text,
+    required GestureTapCallback onTap,
+  }) {
     return ListTile(
       title: Row(
         children: <Widget>[
@@ -127,13 +156,14 @@ class _HomeScreenState extends State<HomeScreen> {
           Padding(
             padding: EdgeInsets.only(left: 8.0),
             child: Text(text),
-          )
+          ),
         ],
       ),
       onTap: onTap,
     );
   }
 
+  // 보고서 아이템 생성기
   Widget _buildReportItem(BuildContext context,
       {required IconData icon, required String title}) {
     return Card(

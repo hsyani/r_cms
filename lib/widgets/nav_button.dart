@@ -1,5 +1,5 @@
 // File: /lib/widgets/nav_button.dart
-import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class NavButton extends StatefulWidget {
@@ -50,73 +50,51 @@ class _NavButtonState extends State<NavButton>
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        // 반응형 레이아웃에서 크기 설정
-        double buttonWidth = constraints.maxWidth > 500
-            ? constraints.maxWidth * 0.6
-            : constraints.maxWidth * 0.9;
-        double iconSize = constraints.maxWidth > 500 ? 30 : 24;
-        double labelFontSize = constraints.maxWidth > 500 ? 18 : 16;
-        double descriptionFontSize = constraints.maxWidth > 500 ? 14 : 12;
-
-        // 반응형 SizedBox의 너비 설정
-        double sizedBoxWidth =
-            constraints.maxWidth > 800 ? constraints.maxWidth / 7 : 50;
-
-        return ScaleTransition(
-          scale: _animation,
-          child: Container(
-            width: buttonWidth,
-            child: ElevatedButton(
-              onPressed: _handleTap,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                padding: const EdgeInsets.all(16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  SizedBox(
-                    width: sizedBoxWidth, // 반응형 SizedBox
-                  ),
-                  Container(
-                    child:
-                        Icon(widget.icon, color: Colors.blue, size: iconSize),
-                  ),
-                  const SizedBox(width: 20),
-                  Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.label,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: labelFontSize,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          widget.description,
-                          style: TextStyle(
-                            color: Colors.black54,
-                            fontSize: descriptionFontSize,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+    return ScaleTransition(
+      scale: _animation,
+      child: Container(
+        constraints: BoxConstraints(maxWidth: 400), // 최대 너비 설정
+        child: ElevatedButton(
+          onPressed: _handleTap,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.white,
+            padding: const EdgeInsets.all(16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
             ),
           ),
-        );
-      },
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Icon(widget.icon, color: Colors.blue, size: 30),
+              const SizedBox(width: 20),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.label,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      widget.description,
+                      style: const TextStyle(
+                        color: Colors.black54,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

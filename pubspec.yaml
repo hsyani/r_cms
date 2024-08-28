@@ -35,6 +35,8 @@ dependencies:
   go_router: ^6.0.0 # 최신 버전 확인
   flutter_localizations:
     sdk: flutter
+  sliding_up_panel: ^2.0.0+1
+  draggable_home: ^1.0.5
 
 dev_dependencies:
   flutter_test:
