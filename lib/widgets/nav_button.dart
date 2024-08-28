@@ -29,10 +29,10 @@ class _NavButtonState extends State<NavButton>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 100),
       vsync: this,
     );
-    _animation = Tween<double>(begin: 1.0, end: 0.0).animate(_controller);
+    _animation = Tween<double>(begin: 1.0, end: 0.9).animate(_controller);
   }
 
   @override
@@ -72,7 +72,7 @@ class _NavButtonState extends State<NavButton>
               onPressed: _handleTap,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.all(16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
                 ),
@@ -87,7 +87,7 @@ class _NavButtonState extends State<NavButton>
                     child:
                         Icon(widget.icon, color: Colors.blue, size: iconSize),
                   ),
-                  const SizedBox(width: 10),
+                  const SizedBox(width: 20),
                   Container(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

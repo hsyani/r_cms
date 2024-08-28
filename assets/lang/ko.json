@@ -1,0 +1,11 @@
+{
+  "appTitle": "SCIST",
+  "dashboard": "대시보드",
+  "report": "보고서",
+  "settings": "설정",
+  "admin": "어드민",
+  "chemicalManagement": "화학물질 관리대장",
+  "specialManagement": "특별관리물질 관리대장",
+  "monthlyReagentManagement": "월간시약 관리대장",
+  "hazardousMaterialManagement": "유해인자 취급 및 관리대장"
+}

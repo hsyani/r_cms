@@ -1,0 +1,11 @@
+{
+  "appTitle": "SCIST",
+  "dashboard": "Dashboard",
+  "report": "Reports",
+  "settings": "Settings",
+  "admin": "Admin",
+  "chemicalManagement": "Chemical Management",
+  "specialManagement": "Special Substance Management",
+  "monthlyReagentManagement": "Monthly Reagent Management",
+  "hazardousMaterialManagement": "Hazardous Material Management"
+}
