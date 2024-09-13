@@ -6,14 +6,14 @@ import 'settings_screen.dart';
 import 'admin_screen.dart';
 import 'dashboard_screen.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class WorkerHomeScreen extends StatefulWidget {
+  const WorkerHomeScreen({super.key});
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _WorkerHomeScreenState createState() => _WorkerHomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return DraggableHome(
@@ -63,10 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: const [
             Text(
               '상단 슬라이딩 패널',
-              style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
             ),
             SizedBox(height: 10),
             Text(
@@ -114,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => HomeScreen()),
+                MaterialPageRoute(builder: (context) => WorkerHomeScreen()),
               );
             },
           ),
@@ -164,8 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   // 보고서 아이템 생성기
-  Widget _buildReportItem(BuildContext context,
-      {required IconData icon, required String title}) {
+  Widget _buildReportItem(BuildContext context, {required IconData icon, required String title}) {
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 10),
       child: ListTile(

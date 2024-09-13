@@ -1,21 +1,17 @@
 // /lib/widgets/login_card.dart
-
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:r_cms_v_3_0/screens/home_screen.dart';
 
 class LoginCard extends StatelessWidget {
   const LoginCard({
     super.key,
-    required TextEditingController usernameController,
-    required TextEditingController passwordController,
-  })  : _usernameController = usernameController,
-        _passwordController = passwordController;
+    required this.usernameController,
+    required this.passwordController,
+    required this.onLoginPressed,
+  });
 
-  final TextEditingController _usernameController;
-  final TextEditingController _passwordController;
+  final TextEditingController usernameController;
+  final TextEditingController passwordController;
+  final VoidCallback onLoginPressed; // 콜백을 통해 InitScreen에 이벤트 전달
 
   @override
   Widget build(BuildContext context) {
@@ -32,17 +28,9 @@ class LoginCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "R-CMS PC",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black54,
-                  ),
-                ),
                 const SizedBox(height: 10),
                 TextField(
-                  controller: _usernameController,
+                  controller: usernameController,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.person),
                     labelText: '아이디',
@@ -53,7 +41,7 @@ class LoginCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 TextField(
-                  controller: _passwordController,
+                  controller: passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.lock),
@@ -67,14 +55,7 @@ class LoginCard extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
-                      // HomeScreen으로 이동
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HomeScreen()),
-                      );
-                    },
+                    onPressed: onLoginPressed, // 로그인 버튼 클릭 시 콜백 호출
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 15),
                       shape: RoundedRectangleBorder(
@@ -83,8 +64,10 @@ class LoginCard extends StatelessWidget {
                     ),
                     child: const Text(
                       '로그인',
-                      style:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
